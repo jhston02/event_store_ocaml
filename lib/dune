@@ -1,0 +1,29 @@
+(include_subdirs unqualified)
+(library
+ (name event_store_ocaml)
+ (libraries ocaml-protoc-plugin containers))
+
+ (rule
+ (targets google_include)
+ (action (with-stdout-to %{targets}
+          (system "pkg-config protobuf --variable=includedir"))))
+
+(rule
+ (deps (package ocaml-protoc-plugin))
+ (targets any.ml api.ml descriptor.ml duration.ml empty.ml field_mask.ml
+          source_context.ml struct.ml timestamp.ml type.ml wrappers.ml)
+ (action
+  (run protoc -I %{read-lines:google_include}
+       "--ocaml_out=annot=[@@deriving show { with_path = false }, eq, ord]:."
+       %{read-lines:google_include}/google/protobuf/any.proto
+       %{read-lines:google_include}/google/protobuf/api.proto
+       %{read-lines:google_include}/google/protobuf/descriptor.proto
+       %{read-lines:google_include}/google/protobuf/duration.proto
+       %{read-lines:google_include}/google/protobuf/empty.proto
+       %{read-lines:google_include}/google/protobuf/field_mask.proto
+       %{read-lines:google_include}/google/protobuf/source_context.proto
+       %{read-lines:google_include}/google/protobuf/struct.proto
+       %{read-lines:google_include}/google/protobuf/timestamp.proto
+       %{read-lines:google_include}/google/protobuf/type.proto
+       %{read-lines:google_include}/google/protobuf/wrappers.proto
+)))

@@ -1,0 +1,4 @@
+(executable
+ (public_name event_store_ocaml)
+ (name main)
+ (libraries event_store_ocaml))
