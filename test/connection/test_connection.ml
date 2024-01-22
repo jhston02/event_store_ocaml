@@ -1,0 +1,1 @@
+let connection = Alcotest.testable Book.pp_e Book.equal_e

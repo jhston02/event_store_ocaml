@@ -14,6 +14,9 @@ depends: [
   "dune" {>= "3.11"}
   "ocaml-protoc-plugin"
   "containers"
+  "alcotest" {with-test}
+  "qcheck" {with-test}
+  "qcheck-alcotest" {with-test}
   "odoc" {with-doc}
 ]
 build: [

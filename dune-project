@@ -19,7 +19,7 @@
  (name event_store_ocaml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune ocaml-protoc-plugin containers)
+ (depends ocaml dune ocaml-protoc-plugin containers (alcotest :with-test) (qcheck :with-test) (qcheck-alcotest :with-test))
  (tags
   (topics "to describe" your project)))
 
